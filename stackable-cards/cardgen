@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# Check if OpenSCAD is installed
+if ! command -v openscad &> /dev/null; then
+    echo "OpenSCAD could not be found. Please install it to use this script."
+    exit 1
+fi
+
+# Default values
+value="A"
+type="spades"
+size="30"
+output_dir="cards"
+font="Liberation Mono"
+
+# Parse named parameters
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --value)
+            value="$2"
+            shift 2
+            ;;
+        --type)
+            type="$2"
+            shift 2
+            ;;    
+        --size)
+            size="$2"
+            shift 2
+            ;;
+        --output_dir)
+            output_dir="$2"
+            shift 2
+            ;;
+        --font)
+            font="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown parameter: $1"
+            exit 1
+            ;;
+    esac
+done
+
+# Prompt for value if not provided
+if [[ -z "$value" ]]; then
+    while true; do
+        read -r -p "Enter card value (default: A): " value
+        value=${value:-A}
+        read -r -p "Enter card type (default: spades): " type
+        type="${value}_of_${type:-spades}"
+        if [[ -n "$type" ]]; then
+            break
+        else
+            echo "Type must be provided (spades, hearts, diamonds, clubs). Please try again."
+        fi
+    done
+fi
+
+# Display the collected values
+echo "Generating Card '$value' of '$type' with size $size, font $font"
+openscad -o "$output_dir/$value-$type.stl" -D "value=\"$value\"" -D "type=\"$type\"" -D "font=\"$font\"" -D "size=$size" base.scad
+
+echo "Card '$value' of '$type' generated successfully as $output_dir/$value-$type.stl."

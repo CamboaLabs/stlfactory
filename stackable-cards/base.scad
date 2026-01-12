@@ -16,7 +16,9 @@ stamp03_y = height/2 - 10;
 stamp04_x = width/2 - 14;
 stamp04_y = height/2 - 10;
 
-RenderCard(card=value, font=font, type=type);
+//rotate so card faces down for easier print
+rotate([0,180,0])
+    RenderCard(card=value, font=font, type=type);
 
 
 module RenderCard(
@@ -28,8 +30,8 @@ module RenderCard(
     
     difference() {
         import("card-base.stl", convexity=3);
-        translate([0,0,5.5]) {
-            scale([0.5,0.5,0.5])
+        translate([0,0,0.4]) {
+            scale([0.5,0.5,0.5]) mirror([1,0,0])
                 import("logo_printables.stl", convexity=3);
         }
         
@@ -56,8 +58,8 @@ module RenderCardValue(
 
     rotate([180,0,0]) {
         mirror([1,0,0]) {
-           Stamp(string=value, x=stamp03_x, y=stamp03_y, z=-5.5);
-           Stamp(string=value, x=stamp04_x, y=stamp04_y, z=-5.5);
+           Stamp(string=value, x=stamp03_x, y=stamp03_y, z=-5.4);
+           Stamp(string=value, x=stamp04_x, y=stamp04_y, z=-5.4);
         }
     } 
 }
@@ -70,8 +72,8 @@ module RenderCardDecoration(
         
     rotate([180,0,0]) {
         mirror([1,0,0]) {
-            Stamp(string=char, x=stamp03_x, y=stamp03_y-15, z=-5.5);
-            Stamp(string=char, x=stamp04_x, y=stamp04_y-15, z=-5.5);
+            Stamp(string=char, x=stamp03_x, y=stamp03_y-15, z=-5.4);
+            Stamp(string=char, x=stamp04_x, y=stamp04_y-15, z=-5.4);
         }
     }
 }
