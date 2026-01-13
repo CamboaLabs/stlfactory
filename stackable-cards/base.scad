@@ -1,20 +1,20 @@
 value="A";
 type="diamonds"; // valid types: spades, diamonds, clubs, hearts
-font="Liberation Mono";
+font="Liberation Serif";
 width=60;
 height=90;
 
-stamp01_x = 0-width/2 + 5;
-stamp01_y = height/2 - 10;
+stamp01_x = 0-width/2 + 10;
+stamp01_y = height/2 - 14;
     
-stamp02_x = width/2 - 15;
-stamp02_y = height/2 - 10;
+stamp02_x = width/2 - 10;
+stamp02_y = height/2 - 14;
     
-stamp03_x = 0-width/2 + 7;
-stamp03_y = height/2 - 10;
+stamp03_x = 0-width/2 + 10;
+stamp03_y = height/2 - 14;
     
-stamp04_x = width/2 - 14;
-stamp04_y = height/2 - 10;
+stamp04_x = width/2 - 10;
+stamp04_y = height/2 - 14;
 
 //rotate so card faces down for easier print
 rotate([0,180,0])
@@ -83,8 +83,7 @@ module Stamp(
     string="A", 
     size=10, 
     thickness=10,
-    font="Liberation Mono",
-    align="top",
+    align="center",
     x=0,
     y=0,
     z=0) {   
